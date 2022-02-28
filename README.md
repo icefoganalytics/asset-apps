@@ -16,8 +16,19 @@ docker-compose -f docker-compose.dev.yaml up
 # or if you can run bash
 bin/dev up
 ```
+> # `bin/dev` is the equivalent of `docker-compose -f docker-compose.dev.yaml`
 
-Old Way
+Normalizing code before shipping can be accomplished via:
+
+```bash
+docker-compose -f docker-compose.dev.yaml exec api sh
+npm run lint
+# or
+docker-compose -f docker-compose.dev.yaml exec web sh
+npm run lint
+```
+
+#### Old Way
 
 ```
 # at top level folder
@@ -33,6 +44,10 @@ cd ../web
 npm install
 npm run start
 ```
+
+Normalizing code before shipping can be accomplished via:
+
+`npm run lint` vai both the "web" or "api" package scripts.
 
 ### Production
 
