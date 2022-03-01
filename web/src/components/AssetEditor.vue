@@ -165,15 +165,15 @@ import { formatDollar } from "../utils/formatters";
 export default {
   computed: {
     ...mapGetters(["defaultAssetOwner", "mailcodeOptions"]),
-    transferDirectionIcon: function () {
+    transferDirectionIcon: function() {
       if (this.transferDirection) return "mdi-redo";
       return "mdi-undo";
     },
-    transferDirectionName: function () {
+    transferDirectionName: function() {
       if (this.transferDirection) return "Inbound transfer";
       return "Outbound transfer";
     },
-    isTransfer: function () {
+    isTransfer: function() {
       if (this.oldOwner != this.item.asset_owner_id) {
         return true;
       }
@@ -183,7 +183,7 @@ export default {
 
       return false;
     },
-    isTransferDirection: function () {
+    isTransferDirection: function() {
       if (this.item.asset_owner_id == this.defaultAssetOwner) return "incoming";
       return "outgoing";
     },

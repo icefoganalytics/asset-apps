@@ -94,13 +94,13 @@ export default {
       "roles",
       "manage_mailcodes",
     ]),
-    myManaged: function () {
+    myManaged: function() {
       if (this.roles && this.roles.length > 0)
         return this.manage_mailcodes.join(", ");
 
       return "";
     },
-    myRoles: function () {
+    myRoles: function() {
       if (this.roles && this.roles.length > 0) return this.roles.join(", ");
 
       return "";

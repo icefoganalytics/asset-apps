@@ -72,12 +72,12 @@ import { USER_URL } from "../urls";
 export default {
   name: "UserEditor",
   computed: {
-    isAssetManager: function () {
+    isAssetManager: function() {
       if (this.user.roles && this.user.roles.indexOf("Asset Manager") >= 0)
         return true;
       return false;
     },
-    mailcodeOptions: function () {
+    mailcodeOptions: function() {
       return store.getters.mailcodeOptions;
     },
   },

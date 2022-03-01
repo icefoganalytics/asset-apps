@@ -11,9 +11,7 @@
     <div class="row">
       <div class="col-md-6">
         <v-card class="mt-5 default">
-          <v-card-title
-            >Want to transfer or dispose of assets?</v-card-title
-          >
+          <v-card-title>Want to transfer or dispose of assets?</v-card-title>
           <v-card-text>
             <asset-transfer-form></asset-transfer-form>
           </v-card-text>

@@ -222,17 +222,17 @@ export default {
   methods: {
     ...mapActions(["initialize", "checkAuthentication"]),
     ...mapActions("profile", ["loadProfile"]),
-    nav: function (location) {
+    nav: function(location) {
       router.push(location);
       console.log(location);
     },
-    toggleHeader: function () {
+    toggleHeader: function() {
       this.headerShow = !this.headerShow;
     },
-    toggleMenu: function () {
+    toggleMenu: function() {
       this.menuShow = !this.menuShow;
     },
-    signOut: function () {
+    signOut: function() {
       window.location = LOGOUT_URL;
     },
   },
