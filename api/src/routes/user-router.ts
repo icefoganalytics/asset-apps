@@ -11,115 +11,115 @@ export const userRouter = express.Router();
 const userService = new UserService(db);
 
 userRouter.get("/me", async (req: Request, res: Response) => {
-    const currentUser = req.user;
-    const user = await userService.getByEmail(currentUser.email);
+  const currentUser = req.user;
+  const user = await userService.getByEmail(currentUser.email);
 
-    const { id: mailcodeId } = await db
-        .select("id")
-        .from("asset_owner")
-        .where({ mailcode: user.mailcode })
-        .first();
+  const { id: mailcodeId } = await db
+    .select("id")
+    .from("asset_owner")
+    .where({ mailcode: user.mailcode })
+    .first();
 
-    const userProfile = await userService.makeDTO({
-        mailcodeId,
-        ...currentUser,
-        ...user,
-    });
-    return res.json({
-        data: userProfile,
-    });
+  const userProfile = await userService.makeDTO({
+    mailcodeId,
+    ...currentUser,
+    ...user,
+  });
+  return res.json({
+    data: userProfile,
+  });
 });
 
 userRouter.get("/", async (req: Request, res: Response) => {
-    let list = await userService.getAll();
+  let list = await userService.getAll();
 
-    for (let user of list) {
-        user = await userService.makeDTO(user);
-    }
+  for (let user of list) {
+    user = await userService.makeDTO(user);
+  }
 
-    return res.json({ data: list });
+  return res.json({ data: list });
 });
 
 userRouter.put(
-    "/:email",
-    [param("email").notEmpty().isString()],
-    ReturnValidationErrors,
-    async (req: Request, res: Response) => {
-        let { email } = req.params;
-        let { roles, status, mailcode, manage_mailcodes } = req.body;
+  "/:email",
+  [param("email").notEmpty().isString()],
+  ReturnValidationErrors,
+  async (req: Request, res: Response) => {
+    let { email } = req.params;
+    let { roles, status, mailcode, manage_mailcodes } = req.body;
 
-        let user = {
-            roles: _.join(roles, ","),
-            status,
-            mailcode,
-            manage_mailcodes: _.join(manage_mailcodes, ","),
-        };
+    let user = {
+      roles: _.join(roles, ","),
+      status,
+      mailcode,
+      manage_mailcodes: _.join(manage_mailcodes, ","),
+    };
 
-        await userService.update(email, user);
+    await userService.update(email, user);
 
-        return res.json({
-            messages: [{ variant: "success", text: "User saved" }],
-        });
-    }
+    return res.json({
+      messages: [{ variant: "success", text: "User saved" }],
+    });
+  }
 );
 
 userRouter.put(
-    "/:email/mailcode",
-    [param("email").notEmpty().isString(), body("mailcode").notEmpty()],
-    ReturnValidationErrors,
-    async (req: Request, res: Response) => {
-        let { email } = req.params;
-        let { mailcode } = req.body;
+  "/:email/mailcode",
+  [param("email").notEmpty().isString(), body("mailcode").notEmpty()],
+  ReturnValidationErrors,
+  async (req: Request, res: Response) => {
+    let { email } = req.params;
+    let { mailcode } = req.body;
 
-        let user = await userService.getByEmail(email);
+    let user = await userService.getByEmail(email);
 
-        if (user) {
-            user.mailcode = mailcode;
-            await userService.update(email, user);
-            return res.json({
-                messages: [{ variant: "success", text: "Mail code saved" }],
-            });
-        }
-
-        res.status(404).send();
+    if (user) {
+      user.mailcode = mailcode;
+      await userService.update(email, user);
+      return res.json({
+        messages: [{ variant: "success", text: "Mail code saved" }],
+      });
     }
+
+    res.status(404).send();
+  }
 );
 
 userRouter.delete(
-    "/:id",
-    [param("id").notEmpty()],
-    ReturnValidationErrors,
-    async (req: Request, res: Response) => {
-        let { id } = req.params;
+  "/:id",
+  [param("id").notEmpty()],
+  ReturnValidationErrors,
+  async (req: Request, res: Response) => {
+    let { id } = req.params;
 
-        //await userService.disable(id);
+    //await userService.disable(id);
 
-        let list = await userService.getAll();
+    let list = await userService.getAll();
 
-        return res.json({
-            data: list,
-            messages: [{ variant: "success", text: "Location removed" }],
-        });
-    }
+    return res.json({
+      data: list,
+      messages: [{ variant: "success", text: "Location removed" }],
+    });
+  }
 );
 
 userRouter.get(
-    "/make-admin/:email/:key",
-    async (req: Request, res: Response) => {
-        let user = await userService.getByEmail(req.params.email);
+  "/make-admin/:email/:key",
+  async (req: Request, res: Response) => {
+    let user = await userService.getByEmail(req.params.email);
 
-        let { email, key } = req.params;
+    let { email, key } = req.params;
 
-        if (key != process.env.SECRET) {
-            return res.status(403).send("Your key is invalid");
-        }
-
-        if (user) {
-            console.log(`KEY MATCHES, making ${email} an admin`);
-            user.roles = ["Admin"];
-            await userService.update(email, user);
-        }
-
-        res.send("Done");
+    if (key != process.env.SECRET) {
+      return res.status(403).send("Your key is invalid");
     }
+
+    if (user) {
+      console.log(`KEY MATCHES, making ${email} an admin`);
+      user.roles = ["Admin"];
+      await userService.update(email, user);
+    }
+
+    res.send("Done");
+  }
 );
