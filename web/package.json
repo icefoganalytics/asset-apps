@@ -50,7 +50,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "vue/multi-word-component-names": "warn"
+      "vue/multi-word-component-names": "warn",
+      "vue/valid-v-slot": "warn"
     }
   },
   "browserslist": [
