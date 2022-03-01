@@ -115,7 +115,7 @@
               </v-list-item-icon>
               <v-list-item-title>My profile</v-list-item-title>
             </v-list-item>
-            
+
             <v-list-item to="/my-requested-tags">
               <v-list-item-icon>
                 <v-icon>mdi-tag-multiple</v-icon>
@@ -229,17 +229,17 @@ export default {
   methods: {
     ...mapActions(["initialize", "checkAuthentication"]),
     ...mapActions("profile", ["loadProfile"]),
-    nav: function (location) {
+    nav: function(location) {
       router.push(location);
       console.log(location);
     },
-    toggleHeader: function () {
+    toggleHeader: function() {
       this.headerShow = !this.headerShow;
     },
-    toggleMenu: function () {
+    toggleMenu: function() {
       this.menuShow = !this.menuShow;
     },
-    signOut: function () {
+    signOut: function() {
       window.location = LOGOUT_URL;
     },
   },

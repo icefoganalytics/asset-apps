@@ -62,7 +62,7 @@ export default {
     // this.getAssetHistory(this.assetId);
   },
   watch: {
-    assetId: function (val) {
+    assetId: function(val) {
       this.getAssetHistory(val);
     },
   },

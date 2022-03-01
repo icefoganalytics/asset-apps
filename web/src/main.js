@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import vuetify from "./plugins/vuetify";
-import VueCurrencyInput from 'vue-currency-input'
+import VueCurrencyInput from "vue-currency-input";
 
 import Notifications from "./components/Notifications";
 import UserEditor from "./components/UserEditor";
@@ -39,11 +39,11 @@ Vue.component("asset-lookup-form", AssetLookupForm);
 Vue.component("mailcode-select", MailcodeSelect);
 Vue.component("admin-sidebar", AdministrationSidebar);
 
-Vue.use(VueCurrencyInput, { globalOptions: { currency: 'USD', locale: 'en' } });
+Vue.use(VueCurrencyInput, { globalOptions: { currency: "USD", locale: "en" } });
 
 new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

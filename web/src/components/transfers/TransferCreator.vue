@@ -148,21 +148,21 @@ import { OWNER_URL, TRANSFER_URL } from "../../urls";
 
 export default {
   computed: {
-    mailcodeOptions: function () {
+    mailcodeOptions: function() {
       return store.getters.mailcodeOptions;
     },
-    assetTypeOptions: function () {
+    assetTypeOptions: function() {
       return store.getters.assetTypeOptions;
     },
-    transferDirectionIcon: function () {
+    transferDirectionIcon: function() {
       if (this.transferDirection) return "mdi-redo";
       return "mdi-undo";
     },
-    transferDirectionName: function () {
+    transferDirectionName: function() {
       if (this.transferDirection) return "Inbound transfer";
       return "Outbound transfer";
     },
-    isValid: function () {
+    isValid: function() {
       for (let row of this.item.rows) {
         if (!row.type) return false;
       }

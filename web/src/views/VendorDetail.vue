@@ -146,9 +146,14 @@ export default {
     this.loadPayments(this.vendorId);
   },
   computed: {
-    totalPayments: function () {
-        let total = this.payments.reduce((t, p) => {return t + p.amount;}, 0);
-        return Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(total);
+    totalPayments: function() {
+      let total = this.payments.reduce((t, p) => {
+        return t + p.amount;
+      }, 0);
+      return Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(total);
     },
   },
   methods: {

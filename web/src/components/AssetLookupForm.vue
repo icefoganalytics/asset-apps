@@ -82,7 +82,7 @@ export default {
   },
 
   computed: {
-    selectedHint: function () {
+    selectedHint: function() {
       if (this.search == null || this.search == "")
         return "Enter your search criteria";
       else return "No matches found";

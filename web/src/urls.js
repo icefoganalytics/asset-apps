@@ -1,4 +1,4 @@
-import * as config from './config';
+import * as config from "./config";
 
 export const LOGIN_URL = `${config.apiBaseUrl}/api/auth/login`;
 export const AUTH_CHECK_URL = `${config.apiBaseUrl}/api/auth/is-authenticated`;
