@@ -1,4 +1,3 @@
-
 export interface asset_transfer {
-    id: number;
+  id: number;
 }
