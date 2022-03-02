@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon -L src/index.ts",
-    "lnit": "prettier --write src/**/*.ts"
+    "lint": "prettier --write \"src/**/*.+(js|ts|json)\""
   },
   "author": "Michael Johnson",
   "license": "ISC",
@@ -60,7 +60,7 @@
     ],
     "rules": {
       "no-console": "warn",
-      "prettier/prettier": "error"
+      "prettier/prettier": "warn"
     }
   }
 }
